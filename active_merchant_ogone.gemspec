@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jan De Poorter", "Simon Menke"]
   s.date = "2012-04-26"
-  s.description = "A plugin for Ogone support in ActiveRecord. "
+  s.description = "A plugin for Ogone support in ActiveMerchant. "
   s.email = "github@defv.be"
   s.extra_rdoc_files = [
     "README.rdoc"
@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/DefV/active_merchant_ogone/tree/master"
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.17"
-  s.summary = "A plugin for Ogone support in ActiveRecord."
+  s.summary = "A plugin for Ogone support in ActiveMerchant."
 
   if s.respond_to? :specification_version then
     s.specification_version = 3

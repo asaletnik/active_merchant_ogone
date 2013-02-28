@@ -17,9 +17,12 @@ module ActiveMerchant #:nodoc:
         
         mattr_accessor :test_service_url
         mattr_accessor :live_service_url
-        
+
+        mattr_accessor :sha512
+
         self.test_service_url = 'https://secure.ogone.com/ncol/test/orderstandard_utf8.asp'
         self.live_service_url = 'https://secure.ogone.com/ncol/prod/orderstandard_utf8.asp'
+        self.sha512 = false
         
         def self.setup
           yield(self)
@@ -45,7 +48,7 @@ module ActiveMerchant #:nodoc:
                               sort_by {|k, v| k.upcase }.
                               collect{|key, value| "#{key.upcase}=#{value}#{signature}"}.join
                               
-          Digest::SHA1.hexdigest(datastring).upcase
+          self.sha512 ? Digest::SHA512.hexdigest(datastring).upcase : Digest::SHA1.hexdigest(datastring).upcase
         end
         
         def self.inbound_message_signature(fields, signature=nil)
@@ -54,7 +57,7 @@ module ActiveMerchant #:nodoc:
                               sort_by {|k, v| INBOUND_ENCRYPTED_VARIABLES.index(k.upcase) }.
                               collect {|key, value| "#{key.upcase}=#{value}#{signature}"}.join
                              
-          Digest::SHA1.hexdigest(datastring).upcase
+          self.sha512 ? Digest::SHA512.hexdigest(datastring).upcase : Digest::SHA1.hexdigest(datastring).upcase
         end
       end
     end
